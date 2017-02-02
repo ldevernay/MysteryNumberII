@@ -1,0 +1,13 @@
+#timer {
+    font-size: 60px;
+    padding-bottom: 20px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+h1 {
+    font-family: 'Share Tech Mono', monospace;
+}
+
+#start {
+    font-weight: bold;
+}
