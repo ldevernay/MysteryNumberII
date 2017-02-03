@@ -8,6 +8,7 @@ $(document).ready(function(){
   var guessStorage = localStorage;
   var hiScores = JSON.parse(localStorage.getItem('hiScores'));
   var output = "";
+  $('[data-toggle="tooltip"]').tooltip();
 
   // modif hiScores
   // localStorage.clear();
@@ -98,7 +99,7 @@ $(document).ready(function(){
     output = "";
     $("#hiScores").empty();
     for (var property in hiScores) {
-      output += '<p>' + hiScores[property] + ': ' + property+'</p>';
+      output += '<h2>' + hiScores[property] + ': ' + property+'</h2>';
     }
     $("#hiScores").html(output);
   }
