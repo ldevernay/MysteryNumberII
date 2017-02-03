@@ -5,6 +5,20 @@ $(document).ready(function(){
   var i = 1;
   var score;
   var lives;
+  var guessStorage = localStorage;
+  var hiScores = JSON.parse(localStorage.getItem('hiScores'));
+  var output = "";
+
+  // modif hiScores
+  // localStorage.clear();
+  // localStorage.setItem('hiScores', JSON.stringify({'100':'LDE','90':'LDE'}));
+  // hiScores = JSON.parse(localStorage.getItem('hiScores'));
+  // fin modif hiScores
+
+  for (var property in hiScores) {
+    output += '<p>' + hiScores[property] + ': ' + property+'</p>';
+  }
+  $("#hiScores").html(output);
 
   function Chrono(currentTime) {
     $("#guessInput").hide();
@@ -22,7 +36,6 @@ $(document).ready(function(){
 
   var Chronometre = new Chrono(61, 0);
 
-
   $("#start").click(function(){
     nbMyst = (Math.floor((9)*Math.random()+1));
     console.log(nbMyst);
@@ -36,6 +49,7 @@ $(document).ready(function(){
     $("#score").html('Score : ' + score);
     lives = ("<img src='img/heart.png'>").repeat(3);
     $("#life").html(lives);
+    var hiScores = JSON.parse(localStorage.getItem('hiScores'));
   });
 
   $( "#guessForm" ).submit(function( event ) {
@@ -80,6 +94,13 @@ $(document).ready(function(){
     $("#guessInput").hide();
     $("#guessBtn").hide();
     stop();
+    hiScore();
+  }
+
+  function hiScore(){
+
+    // TODO : convert scores to obj for JSON
+    localStorage.setItem('hiScores', JSON.stringify(hiScores));
   }
 
   function guessMysteryNumber(){
