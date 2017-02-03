@@ -12,6 +12,7 @@ $(document).ready(function(){
   var countFirst = 0;
   $('[data-toggle="tooltip"]').tooltip();
   $("#achievements").children("div").children(".glyphicon-star").hide();
+      $("#konami").hide();
 
   // modif hiScores
   localStorage.clear();
@@ -39,7 +40,7 @@ $(document).ready(function(){
 
   $("#start").click(function(){
     nbMyst = (Math.floor((9)*Math.random()+1));
-    console.log(nbMyst);
+        $("#konami").html(nbMyst);
     Chronometre.start();
     $("#start").hide();
     $("#over").hide();
@@ -55,6 +56,21 @@ $(document).ready(function(){
     countSuccess = 0;
     countFirst = 0;
   });
+
+var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+n = 0;
+$(document).keydown(function (e) {
+    if (e.keyCode === k[n++]) {
+        if (n === k.length) {
+            $("#konami").show();
+            n = 0;
+            return false;
+        }
+    }
+    else {
+        n = 0;
+    }
+});
 
   $( "#guessForm" ).submit(function( event ) {
     $("#next").hide();
@@ -168,7 +184,8 @@ $(document).ready(function(){
       score += 5 - i;
       $("#score").html('Score : ' + score);
       nbMyst = (Math.floor((9)*Math.random()+1));
-      console.log(nbMyst);
+          $("#konami").html(nbMyst);
+
       i = 0;
       unlockAchievement("grand");
       countSuccess++;
