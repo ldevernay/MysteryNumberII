@@ -8,12 +8,15 @@ $(document).ready(function(){
   var guessStorage = localStorage;
   var hiScores = JSON.parse(localStorage.getItem('hiScores'));
   var output = "";
+  var countSuccess = 0;
+  var countFirst = 0;
   $('[data-toggle="tooltip"]').tooltip();
+  $("#achievements").children("div").children(".glyphicon-star").hide();
 
   // modif hiScores
-  // localStorage.clear();
-  // localStorage.setItem('hiScores', JSON.stringify({'100':'LDE','10':'LDE','1':'LDE'}));
-  // hiScores = JSON.parse(localStorage.getItem('hiScores'));
+  localStorage.clear();
+  localStorage.setItem('hiScores', JSON.stringify({'1':'LDE','2':'LDE','3':'LDE'}));
+  hiScores = JSON.parse(localStorage.getItem('hiScores'));
   // fin modif hiScores
 
   refreshHiScores();
@@ -48,6 +51,8 @@ $(document).ready(function(){
     lives = ("<img src='img/heart.png'>").repeat(3);
     $("#life").html(lives);
     var hiScores = JSON.parse(localStorage.getItem('hiScores'));
+    countSuccess = 0;
+    countFirst = 0;
   });
 
   $( "#guessForm" ).submit(function( event ) {
@@ -72,6 +77,7 @@ $(document).ready(function(){
     if (Chronometre.time <= 0) {
       stop();
       gameOver();
+      unlockAchievement("highlander");
     }
     $("#timer").html(minute + ":" + seconds);
   }
@@ -108,10 +114,15 @@ $(document).ready(function(){
     var arr = Object.keys( hiScores ).map(function ( key ) { return key; });
 
     var min = Math.min.apply( null, arr );
+        var max = Math.max.apply( null, arr );
     // var max = Math.max.apply( null, arr );
-    if (score > min){
+    if (score > min || arr.length < 3){
       var initiales = prompt('Bravo, tu as réalisé un high-score! Entre ton nom : ');
       hiScores[score] = initiales;
+      unlockAchievement("hiscore");
+    }
+    if (score > max){
+      unlockAchievement("champion");
     }
     if (Object.keys(hiScores).length > 3){
       delete hiScores[min];
@@ -119,6 +130,16 @@ $(document).ready(function(){
     localStorage.setItem('hiScores', JSON.stringify(hiScores));
     hiScores = JSON.parse(localStorage.getItem('hiScores'));
     refreshHiScores();
+  }
+
+  function unlockAchievement(achievement){
+    achievement = "#" + achievement;
+    if ($("#achievements").children(achievement).attr("class").includes("alert-warning")){
+      $("#achievements").children(achievement).children(".glyphicon-star").show();
+      $("#achievements").children(achievement).children(".glyphicon-star-empty").hide();
+      $("#achievements").children(achievement).toggleClass("alert-warning");
+      $("#achievements").children(achievement).toggleClass("alert-success" );
+    }
   }
 
   function guessMysteryNumber(){
@@ -129,6 +150,16 @@ $(document).ready(function(){
     } if (guess > nbMyst) {
       $("#result").html('Le nombre mystère est plus petit !');
     } if (guess == nbMyst) {
+      if (i == 1){
+        unlockAchievement("gontran");
+        countFirst++;
+        if(countFirst > 3){
+          unlockAchievement("cheater");
+        }
+      }
+      if (nbMyst == 7){
+        unlockAchievement("seven");
+      }
       $("#result").html('Bravo ! le nombre mystère était bien ' + nbMyst);
       $("#next").html('Nouveau chiffre!');
       $("#next").show();
@@ -137,6 +168,11 @@ $(document).ready(function(){
       nbMyst = (Math.floor((9)*Math.random()+1));
       console.log(nbMyst);
       i = 0;
+      unlockAchievement("grand");
+      countSuccess++;
+      if(countSuccess > 3){
+        unlockAchievement("lepers");
+      }
     }
     lives = ("<img src='img/heart.png'>").repeat(3-i);
     $("#life").html(lives);
