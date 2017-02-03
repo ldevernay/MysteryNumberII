@@ -40,7 +40,7 @@ $(document).ready(function(){
 
   $("#start").click(function(){
     nbMyst = (Math.floor((9)*Math.random()+1));
-        $("#konami").html(nbMyst);
+        $("#konami").html("Solution : " + nbMyst);
     Chronometre.start();
     $("#start").hide();
     $("#over").hide();
@@ -184,7 +184,7 @@ $(document).keydown(function (e) {
       score += 5 - i;
       $("#score").html('Score : ' + score);
       nbMyst = (Math.floor((9)*Math.random()+1));
-          $("#konami").html(nbMyst);
+          $("#konami").html("Solution : " + nbMyst);
 
       i = 0;
       unlockAchievement("grand");
