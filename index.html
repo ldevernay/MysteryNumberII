@@ -8,37 +8,39 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-6 col-md-4 col-md-offset-4 text-center chrono">
-      <h1>Temps restant</h1>
-      <div id="timer">01:00</div>
-      <div>
-        <button class="btn btn-primary btn-lg" id="start">></button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6 col-md-4 col-md-offset-4 text-center chrono">
+        <h1>Temps restant</h1>
+        <div id="timer">01:00</div>
+        <div>
+          <button class="btn btn-primary btn-lg" id="start">></button>
+        </div>
+        <div>
+          <form id="guessForm" action="#">
+            <div class="form-group">
+              <input type="text" class="form-control" id="guessInput">
+            </div>
+            <button type="button" id="guessBtn" class="btn btn-primary btn-lg">Guess!</button>
+          </form>
+        </div>
+        <div>
+          <p id="result"></p>
+          <p id="next"></p>
+          <p id="over"></p>
+        </div>
       </div>
-      <div>
-        <form id="guessForm" action="#">
-          <div class="form-group">
-            <input type="text" class="form-control" id="guessInput">
-          </div>
-          <button type="button" id="guessBtn" class="btn btn-primary btn-lg">Guess!</button>
-        </form>
-      </div>
-      <div>
-        <p id="result"></p>
-        <p id="next"></p>
-        <p id="over"></p>
-      </div>
-    </div>
-    <div class="col-xs-6 col-md-4 player">
-      <div class="score text-center">
+      <div class="col-xs-6 col-md-4 player">
+        <div id="life" class="text-right">
+        </div>
+        <div class="score text-center">
           <h1 id="score"></h1>
         </div>
+      </div>
     </div>
   </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="js/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="js/index.js"></script>
 </body>
 </html>

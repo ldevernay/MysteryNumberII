@@ -4,6 +4,7 @@ $(document).ready(function(){
   var nbMyst;
   var i = 1;
   var score;
+  var lives;
 
   function Chrono(currentTime) {
     $("#guessInput").hide();
@@ -24,7 +25,7 @@ $(document).ready(function(){
 
   $("#start").click(function(){
     nbMyst = (Math.floor((9)*Math.random()+1));
-        console.log(nbMyst);
+    console.log(nbMyst);
     Chronometre.start();
     $("#start").hide();
     $("#over").hide();
@@ -33,6 +34,8 @@ $(document).ready(function(){
     i = 1;
     score = 0;
     $("#score").html('Score : ' + score);
+    lives = ("<img src='img/heart.png'>").repeat(3);
+    $("#life").html(lives);
   });
 
   $( "#guessForm" ).submit(function( event ) {
@@ -92,9 +95,11 @@ $(document).ready(function(){
       score += 5 - i;
       $("#score").html('Score : ' + score);
       nbMyst = (Math.floor((9)*Math.random()+1));
-          console.log(nbMyst);
+      console.log(nbMyst);
       i = 0;
     }
+    lives = ("<img src='img/heart.png'>").repeat(3-i);
+    $("#life").html(lives);
     i++;
 
     if (i>3){
