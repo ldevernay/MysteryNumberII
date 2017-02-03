@@ -59,6 +59,7 @@ $(document).ready(function(){
     }
     if (Chronometre.time <= 0) {
       stop();
+      gameOver();
     }
     $("#timer").html(minute + ":" + seconds);
   }
