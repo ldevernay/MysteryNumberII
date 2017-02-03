@@ -31,6 +31,11 @@ $(document).ready(function(){
       counter = setInterval(timer, 1000);
       timer();
     };
+    this.hard = function(){
+      clearInterval(counter);
+      counter = setInterval(timer, 100);
+      timer();
+    };
     this.stop = function(){
       stop();
     };
@@ -43,10 +48,29 @@ $(document).ready(function(){
         $("#konami").html("Solution : " + nbMyst);
     Chronometre.start();
     $("#start").hide();
+    $("#hard").hide();
     $("#over").hide();
     $("#guessInput").show();
     $("#guessBtn").show();
+    i = 1;
+    score = 0;
+    $("#score").html('Score : ' + score);
+    lives = ("<img src='img/heart.png'>").repeat(3);
+    $("#life").html(lives);
+    var hiScores = JSON.parse(localStorage.getItem('hiScores'));
+    countSuccess = 0;
+    countFirst = 0;
+  });
 
+  $("#hard").click(function(){
+    nbMyst = (Math.floor((9)*Math.random()+1));
+        $("#konami").html("Solution : " + nbMyst);
+    Chronometre.hard();
+    $("#start").hide();
+    $("#hard").hide();
+    $("#over").hide();
+    $("#guessInput").show();
+    $("#guessBtn").show();
     i = 1;
     score = 0;
     $("#score").html('Score : ' + score);
@@ -110,6 +134,7 @@ $(document).keydown(function (e) {
     $("#over").html('GAME OVER');
     $("#over").show();
     $("#start").show();
+    $("#hard").show();
     $("#result").empty();
     $("#next").hide();
     $("#guessInput").val('');
