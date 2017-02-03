@@ -109,7 +109,8 @@ $(document).ready(function(){
     var min = Math.min.apply( null, arr );
     // var max = Math.max.apply( null, arr );
     if (score > min){
-      hiScores[score] = "LDE";
+      var initiales = prompt('Bravo, tu as réalisé un high-score! Entre ton nom : ');
+      hiScores[score] = initiales;
     }
     if (Object.keys(hiScores).length > 3){
       delete hiScores[min];
