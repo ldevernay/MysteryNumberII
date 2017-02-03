@@ -2,6 +2,7 @@ $(document).ready(function(){
 
   var counter;
   var nbMyst;
+  var i = 1;
 
   function Chrono(currentTime) {
     $("#guessInput").hide();
@@ -29,6 +30,7 @@ $(document).ready(function(){
   });
 
   $( "#guessForm" ).submit(function( event ) {
+  $("#next").hide();
     guessMysteryNumber();
   });
 
@@ -62,7 +64,7 @@ $(document).ready(function(){
   function guessMysteryNumber(){
     var guess = document.getElementById("guessInput").value;
 
-    for(var i = 1; i<=3; i++){
+      console.log(i);
       if (guess < nbMyst){
         $("#result").html('Le nombre mystère est plus grand !');
       } if (guess > nbMyst) {
@@ -70,10 +72,18 @@ $(document).ready(function(){
         // var essai = prompt('Devinez le nombre mystère, il est compris entre 0 et 9');
       } if (guess == nbMyst) {
         $("#result").html('Bravo ! le nombre mystère était bien ' + nbMyst);
+        $("#next").html('Nouveau chiffre!');
         nbMyst = (Math.floor((9)*Math.random()+1));
-        break;
+        i = 0;
       }
-    }
+      i++;
+
+      if (i>3){
+        $("#over").html('GAME OVER');
+        $("#start").show();
+        $("#guessInput").hide();
+        $("#guessBtn").hide();
+      }
   }
 
 });

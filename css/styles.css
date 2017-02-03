@@ -11,3 +11,11 @@ h1 {
 #start {
     font-weight: bold;
 }
+
+#over {
+      font-size: 60px;
+      padding-bottom: 20px;
+      font-family: 'Share Tech Mono', monospace;
+      font-weight: bold;
+      color: red;
+}
