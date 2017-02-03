@@ -45,6 +45,7 @@ $(document).ready(function(){
     $("#over").hide();
     $("#guessInput").show();
     $("#guessBtn").show();
+
     i = 1;
     score = 0;
     $("#score").html('Score : ' + score);
@@ -94,6 +95,7 @@ $(document).ready(function(){
     $("#over").show();
     $("#start").show();
     $("#result").empty();
+    $("#next").hide();
     $("#guessInput").val('');
     $("#guessInput").hide();
     $("#guessBtn").hide();
