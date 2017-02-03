@@ -11,14 +11,11 @@ $(document).ready(function(){
 
   // modif hiScores
   // localStorage.clear();
-  // localStorage.setItem('hiScores', JSON.stringify({'100':'LDE','90':'LDE'}));
+  // localStorage.setItem('hiScores', JSON.stringify({'100':'LDE','10':'LDE','1':'LDE'}));
   // hiScores = JSON.parse(localStorage.getItem('hiScores'));
   // fin modif hiScores
 
-  for (var property in hiScores) {
-    output += '<p>' + hiScores[property] + ': ' + property+'</p>';
-  }
-  $("#hiScores").html(output);
+  refreshHiScores();
 
   function Chrono(currentTime) {
     $("#guessInput").hide();
@@ -97,10 +94,29 @@ $(document).ready(function(){
     hiScore();
   }
 
+  function refreshHiScores(){
+    output = "";
+    $("#hiScores").empty();
+    for (var property in hiScores) {
+      output += '<p>' + hiScores[property] + ': ' + property+'</p>';
+    }
+    $("#hiScores").html(output);
+  }
+  // If necessary, add hiScore, max 3
   function hiScore(){
+    var arr = Object.keys( hiScores ).map(function ( key ) { return key; });
 
-    // TODO : convert scores to obj for JSON
+    var min = Math.min.apply( null, arr );
+    // var max = Math.max.apply( null, arr );
+    if (score > min){
+      hiScores[score] = "LDE";
+    }
+    if (Object.keys(hiScores).length > 3){
+      delete hiScores[min];
+    }
     localStorage.setItem('hiScores', JSON.stringify(hiScores));
+    hiScores = JSON.parse(localStorage.getItem('hiScores'));
+    refreshHiScores();
   }
 
   function guessMysteryNumber(){
