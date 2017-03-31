@@ -6,6 +6,11 @@
       "src": "MysteryNumberII/img/heart.png",
       "type": "image/png",
       "sizes": "56x49"
+    },
+    {
+      "src": "MysteryNumberII/img/favicon.ico",
+      "type": "image/png",
+      "sizes": "256x256"
     }
   ],
   "start_url": "/MysteryNumberII/",
