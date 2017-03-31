@@ -1,10 +1,10 @@
 var CACHE_NAME = 'site-cache';
 var urlsToCache = [
-  '/',
+  '/MysteryNumberII/',
   'https://fonts.googleapis.com/css?family=Share+Tech+Mono',
-  'css/styles.css',
+  '/MysteryNumberIIcss/styles.css',
   'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-  '/js/index.js',
+  '/MysteryNumberII/js/index.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
   'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
 ];
