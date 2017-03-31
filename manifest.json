@@ -1,0 +1,15 @@
+{
+  "short_name": "bob ",
+  "name": "MysteryNumberII",
+  "icons": [
+    {
+      "src": "MysteryNumberII/img/heart.png",
+      "type": "image/png",
+      "sizes": "56x49"
+    }
+  ],
+  "start_url": "/MysteryNumberII/",
+  "background_color": "#9cdb97",
+  "display": "standalone",
+  "theme_color": "#9cdb97"
+}
