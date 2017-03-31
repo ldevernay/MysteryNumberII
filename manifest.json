@@ -11,6 +11,11 @@
       "src": "MysteryNumberII/img/favicon.png",
       "type": "image/png",
       "sizes": "256x256"
+    },
+    {
+      "src": "MysteryNumberII/img/favicon144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
     }
   ],
   "start_url": "/MysteryNumberII/?homescreen=1",
