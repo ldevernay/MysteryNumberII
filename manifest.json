@@ -3,7 +3,7 @@
   "name": "MysteryNumberII",
   "icons": [
     {
-      "src": "MysteryNumberII/img/heart.png",
+      "src": "img/heart.png",
       "type": "image/png",
       "sizes": "56x49"
     },
