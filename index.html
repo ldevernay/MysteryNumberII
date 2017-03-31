@@ -3,9 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Le nombre mystère II : la vengeance</title>
-  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/styles.css">
+  <noscript id="deferred-styles">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+  </noscript>
+    <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+    </script>
 </head>
 <body>
   <div class="container-fluid">
@@ -13,42 +28,42 @@
       <div class="col-xs-6 col-md-4 text-center achivements" id="achievements">
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="Premier chiffre trouvé!" id="grand">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           Comme un grand
         </div>
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="Quatre à la suite!" id="lepers">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           Julien Lepers
         </div>
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="Premier high-score!" id="hiscore">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           Champion
         </div>
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="Premier du classement!" id="champion">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           Champion du monde
         </div>
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="A survécu une minute!" id="highlander">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           Highlander
         </div>
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="Chiffre trouvé du premier coup!" id="gontran">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           Gontran
         </div>
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="A deviné le chiffre 7!" id="seven">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           What's in the box?
         </div>
         <div class="alert alert-warning" role="alert" data-toggle="tooltip" data-placement="bottom" title="Trouvé du premier coup, quatre fois de suite!" id="cheater">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           Cheater
         </div>
         <div id="konami">
@@ -59,7 +74,7 @@
         <div id="timer">01:00</div>
         <div>
           <button class="btn btn-primary btn-lg" id="start">Start</button>
-            <button class="btn btn-primary btn-lg" id="hard">Mode difficile</button>
+          <button class="btn btn-primary btn-lg" id="hard">Mode difficile</button>
         </div>
         <div>
           <form id="guessForm" action="#">
