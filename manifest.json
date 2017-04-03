@@ -3,6 +3,16 @@
   "name": "MysteryNumberII",
   "icons": [
     {
+      "src": "img/heart.png",
+      "type": "image/png",
+      "sizes": "56x49"
+    },
+    {
+      "src": "favicon.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
       "src": "favicon144x144.png",
       "type": "image/png",
       "sizes": "144x144"
