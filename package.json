@@ -1,0 +1,19 @@
+{
+  "name": "mysternumberii",
+  "version": "1.0.0",
+  "description": "Fun version of the Mystery Number exercise",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldevernay/MysteryNumberII.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ldevernay/MysteryNumberII/issues"
+  },
+  "homepage": "https://github.com/ldevernay/MysteryNumberII#readme"
+}
