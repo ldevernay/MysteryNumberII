@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+  var endpoint;
   var counter;
   var nbMyst;
   var i = 1;
@@ -12,7 +13,7 @@ $(document).ready(function(){
   var countFirst = 0;
   $('[data-toggle="tooltip"]').tooltip();
   $("#achievements").children("div").children(".glyphicon-star").hide();
-      $("#konami").hide();
+  $("#konami").hide();
 
   // modif hiScores
   localStorage.clear();
@@ -21,6 +22,53 @@ $(document).ready(function(){
   // fin modif hiScores
 
   refreshHiScores();
+
+  // Handle deferred styles
+  var loadDeferredStyles = function() {
+    var addStylesNode = document.getElementById("deferred-styles");
+    var replacement = document.createElement("div");
+    replacement.innerHTML = addStylesNode.textContent;
+    document.body.appendChild(replacement)
+    addStylesNode.parentElement.removeChild(addStylesNode);
+  };
+  var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+  webkitRequestAnimationFrame || msRequestAnimationFrame;
+  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+  else window.addEventListener('load', loadDeferredStyles);
+
+
+  // Handle Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/MysteryNumberII/sw.js')
+      .then(function(registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        return registration.pushManager.getSubscription()
+        .then(function(subscription) {
+          if (subscription) {
+            return subscription;
+          }
+          return registration.pushManager.subscribe({ userVisibleOnly: true });
+        });
+      }).then(function(subscription) {
+        endpoint = subscription.endpoint;
+        document.getElementById('curl').textContent = 'curl -H "TTL: 60" -X POST ' + endpoint;
+        fetch('./register', {
+          method: 'post',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            endpoint: subscription.endpoint,
+          }),
+        });
+      }).catch(function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
 
   function Chrono(currentTime) {
     $("#guessInput").hide();
@@ -45,7 +93,7 @@ $(document).ready(function(){
 
   $("#start").click(function(){
     nbMyst = (Math.floor((9)*Math.random()+1));
-        $("#konami").html("Solution : " + nbMyst);
+    $("#konami").html("Solution : " + nbMyst);
     Chronometre.start();
     $("#start").hide();
     $("#hard").hide();
@@ -64,7 +112,7 @@ $(document).ready(function(){
 
   $("#hard").click(function(){
     nbMyst = (Math.floor((9)*Math.random()+1));
-        $("#konami").html("Solution : " + nbMyst);
+    $("#konami").html("Solution : " + nbMyst);
     Chronometre.hard();
     $("#start").hide();
     $("#hard").hide();
@@ -81,20 +129,20 @@ $(document).ready(function(){
     countFirst = 0;
   });
 
-var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
-n = 0;
-$(document).keydown(function (e) {
+  var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+  n = 0;
+  $(document).keydown(function (e) {
     if (e.keyCode === k[n++]) {
-        if (n === k.length) {
-            $("#konami").show();
-            n = 0;
-            return false;
-        }
+      if (n === k.length) {
+        $("#konami").show();
+        n = 0;
+        return false;
+      }
     }
     else {
-        n = 0;
+      n = 0;
     }
-});
+  });
 
   $( "#guessForm" ).submit(function( event ) {
     $("#next").hide();
@@ -131,6 +179,9 @@ $(document).keydown(function (e) {
   }
 
   function gameOver(){
+//TEST
+    notifyMe();
+    // FIN TEST
     $("#over").html('GAME OVER');
     $("#over").show();
     $("#start").show();
@@ -157,7 +208,7 @@ $(document).keydown(function (e) {
     var arr = Object.keys( hiScores ).map(function ( key ) { return key; });
 
     var min = Math.min.apply( null, arr );
-        var max = Math.max.apply( null, arr );
+    var max = Math.max.apply( null, arr );
     // var max = Math.max.apply( null, arr );
     if (score > min || arr.length < 3){
       var initiales = prompt('Bravo, tu as réalisé un high-score! Entre ton nom : ');
@@ -209,7 +260,7 @@ $(document).keydown(function (e) {
       score += 5 - i;
       $("#score").html('Score : ' + score);
       nbMyst = (Math.floor((9)*Math.random()+1));
-          $("#konami").html("Solution : " + nbMyst);
+      $("#konami").html("Solution : " + nbMyst);
 
       i = 0;
       unlockAchievement("grand");
@@ -226,5 +277,38 @@ $(document).keydown(function (e) {
       gameOver();
     }
   }
+
+  function notifyMe() {
+    // Voyons si le navigateur supporte les notifications
+    if (!("Notification" in window)) {
+      alert("Ce navigateur ne supporte pas les notifications desktop");
+    }
+
+    // Voyons si l'utilisateur est OK pour recevoir des notifications
+    else if (Notification.permission === "granted") {
+      // Si c'est ok, créons une notification
+      var notification = new Notification("Salut toi !");
+    }
+
+    // Sinon, nous avons besoin de la permission de l'utilisateur
+    // Note : Chrome n'implémente pas la propriété statique permission
+    // Donc, nous devons vérifier s'il n'y a pas 'denied' à la place de 'default'
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+
+        // Quelque soit la réponse de l'utilisateur, nous nous assurons de stocker cette information
+        if(!('permission' in Notification)) {
+          Notification.permission = permission;
+        }
+
+        // Si l'utilisateur est OK, on crée une notification
+        if (permission === "granted") {
+          var notification = new Notification("Salut toi !");
+        }
+      });
+    }
+  }
+
+
 
 });

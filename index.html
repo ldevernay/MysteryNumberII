@@ -96,35 +96,10 @@
     <link rel="stylesheet" href="css/styles.css">
   </noscript>
   <script>
-  // Handle deferred styles
-  var loadDeferredStyles = function() {
-    var addStylesNode = document.getElementById("deferred-styles");
-    var replacement = document.createElement("div");
-    replacement.innerHTML = addStylesNode.textContent;
-    document.body.appendChild(replacement)
-    addStylesNode.parentElement.removeChild(addStylesNode);
-  };
-  var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-  webkitRequestAnimationFrame || msRequestAnimationFrame;
-  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-  else window.addEventListener('load', loadDeferredStyles);
 
-  // Handle Service Worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/MysteryNumberII/sw.js').then(function(registration) {
-        // Registration was successful
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }).catch(function(err) {
-        // registration failed :(
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    });
-  }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script async src="js/index.js"></script>
-  <script async src="js/server.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
